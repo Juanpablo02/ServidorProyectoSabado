@@ -3,8 +3,13 @@
 
 export class ControladorReserva {
     constructor() {}
+    
 
-    agregarReservar(request, response) {
+    agregarReserva(request, response) {
+
+        let datos = request.body
+        console.log(datos)
+
         try {
             response.status(200).json({
                 mensaje: "Exito en la operacion para reservar una habitacion",
@@ -32,6 +37,10 @@ export class ControladorReserva {
     }
 
     consultarReserva(request, response) {
+
+        let id = request.params.id
+        console.log(id)
+
         try {
             response.status(200).json({
                 mensaje: "Exito en la operacion de consulta de reserva",
@@ -46,6 +55,12 @@ export class ControladorReserva {
     }
 
     editarReserva(request, response) {
+
+        let id = request.params.id
+        let datos = request.body
+        console.log(id)
+        console.log(datos)
+
         try {
             response.status(200).json({
                 mensaje: "Exito en la operacion para editar una reserva",

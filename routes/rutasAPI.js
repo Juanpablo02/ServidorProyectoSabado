@@ -24,7 +24,7 @@ rutas.put('/api/hotel/habitaciones/:id',controladorHabitacion.editarHabitacion)
 
 //Rutas para servicio de reservas
 
-rutas.post('/api/hotel/reservas',controladorReserva.agregarReservar)
+rutas.post('/api/hotel/reservas',controladorReserva.agregarReserva)
 rutas.get('/api/hotel/reservas',controladorReserva.consultarReservas)
 rutas.get('/api/hotel/reservas/:id',controladorReserva.consultarReserva)
 rutas.put('/api/hotel/reservas/:id',controladorReserva.editarReserva)
