@@ -1,15 +1,19 @@
 // Una clase controlador establece los metodos (acciones) que vamos a realizar en base de datos
 // y esta alineado con el archivo de rutas
 
+import { ServicioHabitacion } from "../services/ServicioHabitacion.js";
+
 export class ControladorHabitacion {
+
     constructor() {}
 
-    agregarHabitacion(request, response) {
+    async agregarHabitacion(request, response) {
 
         let datosRegistrar = request.body
-        console.log(datosRegistrar)
+        let objetoServicio = new ServicioHabitacion()
 
         try {
+            await objetoServicio.agregarHabitacion(datosRegistrar)
             response.status(200).json({
                 mensaje: "Exito en la operacion para agregar una habitacion",
                 datos: null,
@@ -22,15 +26,15 @@ export class ControladorHabitacion {
         }
     }
 
-    consultarHabitacion(request, response) {
+    async consultarHabitacion(request, response) {
 
         let id = request.params.id
-        console.log("El id enviado fue: "+id)
+        let objetoServicio = new ServicioHabitacion()
 
         try {
             response.status(200).json({
                 mensaje: "Exito en la operacion de consulta de habitacion",
-                datos: null,
+                datos: await objetoServicio.buscarHabitacion(id)
             });
         } catch (error) {
             response.status(400).json({
@@ -40,11 +44,14 @@ export class ControladorHabitacion {
         }
     }
 
-    consultarHabitaciones(request, response) {
+    async consultarHabitaciones(request, response) {
+
+        let objetoServicio = new ServicioHabitacion()
+
         try {
             response.status(200).json({
                 mensaje: "Exito en la operacion de consulta de habitaciones",
-                datos: null,
+                datos: await objetoServicio.buscarHabitaciones(),
             });
         } catch (error) {
             response.status(400).json({
@@ -54,12 +61,14 @@ export class ControladorHabitacion {
         }
     }
 
-    editarHabitacion(request, response) {
+    async editarHabitacion(request, response) {
+
         let id = request.params.id
         let datosEditar = request.body
-        console.log("La habitacion a editar es: " + id)
-        console.log(datosEditar)
+        let objetoServicio = new ServicioHabitacion()
+
         try {
+            await objetoServicio.editarHabitacion(id,datosEditar)
             response.status(200).json({
                 mensaje: "Exito en la operacion para editar una habitacion",
                 datos: null,

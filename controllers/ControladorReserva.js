@@ -1,16 +1,19 @@
 // Una clase controlador establece los metodos (acciones) que vamos a realizar en base de datos
 // y esta alineado con el archivo de rutas
 
+import { ServicioReserva } from "../services/ServicioReserva.js";
+
 export class ControladorReserva {
     constructor() {}
     
 
-    agregarReserva(request, response) {
+    async agregarReserva(request, response) {
 
-        let datos = request.body
-        console.log(datos)
+        let datosRegistrar = request.body
+        let objetoServicio = new ServicioReserva()
 
         try {
+            await objetoServicio.agregarReserva(datosRegistrar)
             response.status(200).json({
                 mensaje: "Exito en la operacion para reservar una habitacion",
                 datos: null,
@@ -22,11 +25,14 @@ export class ControladorReserva {
             });
         }
     }
-    consultarReservas(request, response) {
+    async consultarReservas(request, response) {
+
+        let objetoServicio = new ServicioReserva()
+
         try {
             response.status(200).json({
                 mensaje: "Exito en la operacion de consultar de reservas",
-                datos: null,
+                datos: await objetoServicio.consultarReservas(),
             });
         } catch (error) {
             response.status(400).json({
@@ -36,15 +42,15 @@ export class ControladorReserva {
         }
     }
 
-    consultarReserva(request, response) {
+    async consultarReserva(request, response) {
 
         let id = request.params.id
-        console.log(id)
+        let objetoServicio = new ServicioReserva()
 
         try {
             response.status(200).json({
                 mensaje: "Exito en la operacion de consulta de reserva",
-                datos: null,
+                datos: await objetoServicio.consultarReserva(id),
             });
         } catch (error) {
             response.status(400).json({
@@ -54,14 +60,14 @@ export class ControladorReserva {
         }
     }
 
-    editarReserva(request, response) {
+    async editarReserva(request, response) {
 
         let id = request.params.id
-        let datos = request.body
-        console.log(id)
-        console.log(datos)
+        let datosRegistrar = request.body
+        let objetoServicio = new ServicioReserva()
 
         try {
+            await objetoServicio.editarReserva(id,datosRegistrar)
             response.status(200).json({
                 mensaje: "Exito en la operacion para editar una reserva",
                 datos: null,
